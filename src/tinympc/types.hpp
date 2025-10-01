@@ -1,9 +1,8 @@
 #pragma once
 
 
-#include <Eigen.h>
-// #include <Eigen/Core>
-// #include <Eigen/LU>
+#include <Eigen/Core>
+#include <Eigen/Dense>
 
 using namespace Eigen;
 

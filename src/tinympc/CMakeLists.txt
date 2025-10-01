@@ -7,9 +7,9 @@ add_library(tinympcstatic STATIC
 
 set_property(TARGET tinympcstatic PROPERTY POSITION_INDEPENDENT_CODE ON)
 
-# target_link_libraries(tinympcstatic PUBLIC Eigen)
+# Link Eigen from Conan
+target_link_libraries(tinympcstatic PUBLIC Eigen3::Eigen)
 target_include_directories(tinympcstatic PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..)
-target_include_directories(tinympcstatic PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include/Eigen)
 
 
 
@@ -41,3 +41,19 @@ add_custom_target( copy_codegen_tinympc_files DEPENDS ${EMBEDDED_BUILD_TINYMPC_F
 add_dependencies( copy_codegen_files copy_codegen_tinympc_files )
 
 endif(USING_CODEGEN)
+
+# Install library and headers
+install(TARGETS tinympcstatic
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
+        RUNTIME DESTINATION bin)
+
+install(FILES
+        admm.hpp
+        types.hpp
+        tiny_api.hpp
+        tiny_api_constants.hpp
+        error.hpp
+        codegen.hpp
+        rho_benchmark.hpp
+        DESTINATION include/tinympc)
